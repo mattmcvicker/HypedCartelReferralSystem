@@ -10,17 +10,14 @@ class MemInfoPage extends React.Component  {
     constructor(props) {
         super(props);
         this.state ={
-            
         }
     }
     
     componentDidMount() {
         const { allData } = this.props.location.state
-        console.log(allData)
     }
 
     render() {
-        var allData = this.props.sendData;
         // const renderMember = (member, index) => {
 
         // }

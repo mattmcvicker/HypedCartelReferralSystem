@@ -7,8 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTable } from 'react-table'
 
 import CSVReader from 'react-csv-reader'
-import MemberInfo from './MemberInfo';
 import MemInfoPage from './MemInfoPage';
+import { Link } from 'react-router-dom'
+
 
 class HomePage extends Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class HomePage extends Component {
         this.state = {
             allMemberData: [],
             allActiveMembers: [],
-            monthlyRandomMembers: []
+            monthlyRandomMembers: [],
+            referralValue: null,
         };
     }
 
@@ -37,7 +39,7 @@ class HomePage extends Component {
             referralcode: value[7]
         };  
         if (counter > 0) {
-            console.log(value)
+            // console.log(value)
             allData.push(dataObject);
             if(dataObject.status === "Active" && dataObject.name !== undefined) {
                 activeMembers.push(dataObject);
@@ -55,9 +57,31 @@ class HomePage extends Component {
         for (var i = 0; i < 5; i++) {
             randomFive.push(allActive[Math.floor(Math.random() * allActive.length)]);
         }
+        console.log(randomFive);
     }
 
+    handleReferralSubmit = (event) => {
+      event.preventDefault()
+      console.log(this.state.referralValue)
+      this.state.allMemberData.forEach(value => {
+        console.log(value.referralcode)
+
+        if(value.referralcode === this.state.referralValue) {
+          console.log(value);
+        }
+      })
+    }
+
+    handleReferralInputChange = (event) => {
+      event.preventDefault()
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
+
+
     render() {
+    const {referralValue} = this.state;
     return (
         <div className="App">
           <Navbar bg="light" expand="lg">
@@ -66,8 +90,20 @@ class HomePage extends Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="memberinfo">Member Info</Nav.Link>
-                <Nav.Link href="referralcycle">Referral Cycle</Nav.Link>
+                <Link to={{pathname: "/memberinfo",
+                  state: {
+                    allData: this.state.allMemberData
+                  }
+                }}> 
+                  <Nav.Link href="memberinfo">Member Info</Nav.Link>
+                </Link>  
+                <Link to={{pathname: "/referralcode",
+                  state: {
+                    allData: this.state.allMemberData
+                  }
+                }}>
+                  <Nav.Link href="referralcode">Referral Codes</Nav.Link>
+                </Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -75,13 +111,17 @@ class HomePage extends Component {
             this.setAllData(data);
         }
         } />
-        <MemInfoPage sendData={this.state.allMemberData}></MemInfoPage>
+        {/* <MemInfoPage sendData={this.state.allMemberData}></MemInfoPage> */}
         <button onClick={this.chooseRandomMembers}>Choose 5 Random Active Members</button>
-        <div>
-            {
-                this.state.monthlyRandomMembers.map(member => <h2>{member.name}</h2>)
-            }
-        </div>
+          <div>
+            <h1>Input referral code:</h1>
+            <p>Current referral code: {referralValue}</p>
+            <form onSubmit={this.handleReferralSubmit}>
+              <p><input type='text' placeholder='Submit referral code' name='referralValue' onChange={this.handleReferralInputChange}></input></p>
+              <p><button>Get referral data</button></p>
+            </form>
+          </div>
+          
         </div>
       );
     }
