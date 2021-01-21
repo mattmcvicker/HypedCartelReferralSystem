@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -13,8 +15,9 @@ class MemInfoPage extends React.Component  {
             allMemberData: [],
             allActiveMembers: [],
             referralValue: null,
-            currentReferralCounter: null,
-
+            currentSelectedReferral: null,
+            currentSelectedCount: 0,
+            currentSelectedReferralUsers: []
         }
     }
     
@@ -29,14 +32,17 @@ class MemInfoPage extends React.Component  {
 
     handleReferralSubmit = (event) => {
         event.preventDefault()
-        console.log(this.state.allActiveMembers)
+        this.setState({currentSelectedReferral: this.state.referralValue })
+        var hold = [];
+        var count = 0;
         this.state.allMemberData.forEach(value => {
-          console.log(value.referralcode)
-  
           if(value.referralcode === this.state.referralValue) {
-            console.log(value);
+              hold.push(value);
+              count++;
           }
         })
+        this.setState({currentSelectedReferralUsers: hold});
+        this.setState({currentSelectedCount: count});
       }
   
       handleReferralInputChange = (event) => {
@@ -46,11 +52,21 @@ class MemInfoPage extends React.Component  {
         })
       }
 
+
+
     render() {
         // const renderMember = (member, index) => {
         const {referralValue} = this.state;
-
-        // }
+        const currentSelectedCode = this.state.currentSelectedReferralUsers.map((data)=>{
+            console.log(data)
+            return ( 
+                <div>
+                    <h3>Name: {data.name}</h3>
+                    <h3>Email: {data.email}</h3>      
+                    &nbsp;         
+                </div>
+            )
+        })
         return(
             <div>
                 <Navbar bg="light" expand="lg">
@@ -59,7 +75,14 @@ class MemInfoPage extends React.Component  {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
+                    <Link to={{pathname: "/memberinfo",
+                        state: {
+                            allData: this.state.allMemberData,
+                            activeData: this.state.allActiveMembers
+                        }
+                        }}> 
                     <Nav.Link href="memberinfo">Member Info</Nav.Link>
+                    </Link> 
                     <Nav.Link href="referralcode">Referral Codes</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
@@ -72,6 +95,8 @@ class MemInfoPage extends React.Component  {
                     <p><button>Get referral data</button></p>
                     </form>
                 </div>
+                <div><h3>Total Count: {this.state.currentSelectedCount}</h3></div>
+                <div>{currentSelectedCode}</div>
             </div>
         )
     }

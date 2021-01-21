@@ -79,6 +79,8 @@ class HomePage extends Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
+          <h1>Instructions:</h1>
+          <h4>Select "Choose File" and add the csv file you exported from bold extension.</h4>
           <CSVReader onFileLoaded={(data) => {
             this.setAllData(data);
         }
