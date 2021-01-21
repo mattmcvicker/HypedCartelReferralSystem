@@ -50,38 +50,8 @@ class HomePage extends Component {
         this.setState({ allMemberData : allData});
         this.setState({ allActiveMembers: activeMembers});
     }
-
-    chooseRandomMembers = () => {
-        var randomFive = [];
-        var allActive = this.state.allActiveMembers;
-        for (var i = 0; i < 5; i++) {
-            randomFive.push(allActive[Math.floor(Math.random() * allActive.length)]);
-        }
-        console.log(randomFive);
-    }
-
-    handleReferralSubmit = (event) => {
-      event.preventDefault()
-      console.log(this.state.referralValue)
-      this.state.allMemberData.forEach(value => {
-        console.log(value.referralcode)
-
-        if(value.referralcode === this.state.referralValue) {
-          console.log(value);
-        }
-      })
-    }
-
-    handleReferralInputChange = (event) => {
-      event.preventDefault()
-      this.setState({
-        [event.target.name]: event.target.value
-      })
-    }
-
-
+    
     render() {
-    const {referralValue} = this.state;
     return (
         <div className="App">
           <Navbar bg="light" expand="lg">
@@ -92,14 +62,16 @@ class HomePage extends Component {
                 <Nav.Link href="/">Home</Nav.Link>
                 <Link to={{pathname: "/memberinfo",
                   state: {
-                    allData: this.state.allMemberData
+                    allData: this.state.allMemberData,
+                    activeData: this.state.allActiveMembers
                   }
                 }}> 
                   <Nav.Link href="memberinfo">Member Info</Nav.Link>
                 </Link>  
                 <Link to={{pathname: "/referralcode",
                   state: {
-                    allData: this.state.allMemberData
+                    allData: this.state.allMemberData,
+                    activeData: this.state.allActiveMembers
                   }
                 }}>
                   <Nav.Link href="referralcode">Referral Codes</Nav.Link>
@@ -112,16 +84,6 @@ class HomePage extends Component {
         }
         } />
         {/* <MemInfoPage sendData={this.state.allMemberData}></MemInfoPage> */}
-        <button onClick={this.chooseRandomMembers}>Choose 5 Random Active Members</button>
-          <div>
-            <h1>Input referral code:</h1>
-            <p>Current referral code: {referralValue}</p>
-            <form onSubmit={this.handleReferralSubmit}>
-              <p><input type='text' placeholder='Submit referral code' name='referralValue' onChange={this.handleReferralInputChange}></input></p>
-              <p><button>Get referral data</button></p>
-            </form>
-          </div>
-          
         </div>
       );
     }
