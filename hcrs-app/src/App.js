@@ -7,6 +7,7 @@ import { useTable } from 'react-table'
 import HomePage from "./TABS/HomePage";
 import MemInfoPage from "./TABS/MemInfoPage"
 import ReferralCode from "./TABS/ReferralCode"
+import CreateCycle from "./TABS/CreateCycle"
 import CSVReader from 'react-csv-reader'
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         {/* if currentUrl == "/about", render <AboutPage> */}
         <Route path="/memberinfo" component={MemInfoPage} />
         <Route path="/referralcode" component={ReferralCode} />
-
+        <Route path="/createcycle" component={CreateCycle} />
       </Switch>
         {/* if currentUrl == "/home", render <HomePage> */}
         

@@ -76,6 +76,7 @@ class HomePage extends Component {
                 }}>
                   <Nav.Link href="referralcode">Referral Codes</Nav.Link>
                 </Link>
+                <Nav.Link href="createcycle">Create Cycle</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
