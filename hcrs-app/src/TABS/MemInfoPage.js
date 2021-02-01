@@ -20,7 +20,8 @@ class MemInfoPage extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.location.state.allData !== undefined) {
+        var test = this.props.location.state;
+        if (test !== undefined && test.allData !== undefined) {
             const { allData, activeData } = this.props.location.state
             console.log("MemInfOPage")
             console.log(activeData)

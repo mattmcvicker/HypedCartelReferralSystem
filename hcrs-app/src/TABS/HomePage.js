@@ -22,7 +22,8 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    if (this.props.location.state.allData !== undefined) {
+    var test = this.props.location.state;
+    if (test !== undefined && test.allData !== undefined) {
       const { allData, activeData } = this.props.location.state
       this.setState({ allActiveMembers: activeData });
       this.setState({ allMemberData: allData });
