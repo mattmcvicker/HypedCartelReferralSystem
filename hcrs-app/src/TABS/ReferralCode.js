@@ -1,14 +1,14 @@
 // import logo from './logo.svg';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-
+import { Button } from '@material-ui/core';
+import DataGridDemo from '../TableComponents/currentCycle'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-class MemInfoPage extends React.Component  {
+class ReferralCode extends React.Component  {
     constructor(props) {
         super(props);
         this.state ={
@@ -84,15 +84,22 @@ class MemInfoPage extends React.Component  {
                     <Nav.Link href="memberinfo">Member Info</Nav.Link>
                     </Link> 
                     <Nav.Link href="referralcode">Referral Codes</Nav.Link>
+
+                    <Nav.Link href="createcycle">Start Cycle</Nav.Link>
                     </Nav>
+
                 </Navbar.Collapse>
                 </Navbar>
+                <div>
+                    <h2>Current Refferal Cycle: </h2>
+                    <DataGridDemo></DataGridDemo>
+                </div>
                 <div>
                     <h1>Input referral code:</h1>
                     <p>Current referral code: {referralValue}</p>
                     <form onSubmit={this.handleReferralSubmit}>
                     <p><input type='text' placeholder='Submit referral code' name='referralValue' onChange={this.handleReferralInputChange}></input></p>
-                    <p><button>Get referral data</button></p>
+                    <p><Button variant="contained" color="secondary" onClick={this.handleReferralSubmit}>Get referral data</Button></p>
                     </form>
                 </div>
                 <div><h3>Total Count: {this.state.currentSelectedCount}</h3></div>
@@ -102,4 +109,4 @@ class MemInfoPage extends React.Component  {
     }
 } 
     
-export default MemInfoPage;
+export default ReferralCode;

@@ -1,10 +1,8 @@
 // import logo from './logo.svg';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useTable } from 'react-table'
 
 import CSVReader from 'react-csv-reader'
 import MemInfoPage from './MemInfoPage';
@@ -49,6 +47,7 @@ class HomePage extends Component {
         })
         this.setState({ allMemberData : allData});
         this.setState({ allActiveMembers: activeMembers});
+        console.log(this.state.allActiveMembers)
     }
     
     render() {
