@@ -32,17 +32,17 @@ export default function RandomMemberModal(props) {
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
 
-
     const handleClose = () => {
         setOpen(false);
     };
 
+    var count = 0;
     const randomUsers = props.randomMembers.map((data) => {
-        console.log(data)
+        count++;
         return (
             <div>
-                <h3>Name: {data.name}</h3>
-                <h3>Email: {data.email}</h3>
+                <h4 style={{color: "#f50057", fontStyle: "italic"}}>User {count}: {data.name}</h4>
+                <h4 style={{color: "#f50057", fontStyle: "italic"}}>Email: {data.email}</h4>
             &nbsp;
             </div>
         )

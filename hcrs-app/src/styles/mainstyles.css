@@ -1,0 +1,15 @@
+.mainContainer {
+    background-color: "rgba(38, 39, 44, 0.959)";
+}
+
+.MuiDataGrid-cell {
+    color: white;
+}
+
+.MuiDataGrid-columnsContainer {
+    color: white;
+}
+
+.MuiButtonBase-root {
+    color: white;
+}

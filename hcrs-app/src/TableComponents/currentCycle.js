@@ -2,11 +2,11 @@ import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { firebase } from "../firebase/config";
 import { Button } from '@material-ui/core';
-
+import "../styles/mainstyles.css"
 
 const newcolumns = [
   { field: 'user', headerName: 'User', width: 130 },
-  { field: 'email', headerName: 'Email', width: 130 },
+  { field: 'email', headerName: 'Email', width: 275 },
   { field: 'code', headerName: 'Referral Code', width: 160 },
   { field: 'count', headerName: 'Count', width: 130 }
 ];
@@ -59,11 +59,11 @@ export default function CurrentCycleTable(props) {
 
   return (
     <div>
-      <h3>{currentCycleDate}</h3>
-      <div style={{ height: 400, width: '30%' }}>
+      <h3 style={{ color: "white", fontStyle: "italic", paddingBottom: "10px" }}>Current Referral Cycle: {currentCycleDate}</h3>
+      <div style={{ height: 400, width: '40%', paddingBottom: "20px" }}>
         <DataGrid rows={tableRows} columns={newcolumns} pageSize={5} />
       </div>
-      <Button variant="contained" color="secondary" onClick={loadData}>Load Current Cycle Data</Button>
+      <Button variant="contained" color="secondary" onClick={loadData} style={{marginTop: "20px"}}>Load Current Cycle Data</Button>
     </div>
   );
 }

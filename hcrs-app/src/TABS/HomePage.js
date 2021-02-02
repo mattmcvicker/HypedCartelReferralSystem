@@ -1,10 +1,8 @@
 // import logo from './logo.svg';
 import React, { Component } from 'react';
-import App from "../App"
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AuthContext } from "../App"
-
+import { Button } from '@material-ui/core';
 import CSVReader from 'react-csv-reader'
 import { Link } from 'react-router-dom'
 
@@ -70,47 +68,47 @@ class HomePage extends Component {
       return <div><h1>You are not authorized to see this webpage</h1></div>
     }
     return (
-        <div className="App">
-          <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="/home">Hyped Cartel Usage Tracker</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Link to={{
-                  pathname: "/home",
-                  state: data
-                }}>
-                  <Nav.Link href="/home">Home</Nav.Link>
-                </Link>
-                <Link to={{
-                  pathname: "/memberinfo",
-                  state: data
-                }}>
-                  <Nav.Link href="memberinfo">Member Info</Nav.Link>
-                </Link>
-                <Link to={{
-                  pathname: "/referralcode",
-                  state: data
-                }}>
-                  <Nav.Link href="referralcode">Referral Codes</Nav.Link>
-                </Link>
-                <Link to={{
-                  pathname: "/createcycle",
-                  state: data
-                }}>
-                  <Nav.Link href="createcycle">Create Cycle</Nav.Link>
-                </Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-          <h1>Instructions:</h1>
-          <h4>Select "Choose File" and add the csv file you exported from bold extension.</h4>
-          <CSVReader onFileLoaded={(data) => {
-            this.setAllData(data);
-          }
-          } />
-          {/* <MemInfoPage sendData={this.state.allMemberData}></MemInfoPage> */}
-        </div>
+      <div class="mainContainer" width="100%" height="100%">
+        <Navbar bg="dark" expand="lg">
+          <Navbar.Brand style={{ color: "#f50057" }}>Hyped Cartel Usage Tracker</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Link to={{
+                pathname: "/home",
+                state: data
+              }}>
+                <Nav.Link href="/home" style={{ color: "#f50057" }}>Home</Nav.Link>
+              </Link>
+              <Link to={{
+                pathname: "/memberinfo",
+                state: data
+              }}>
+                <Nav.Link href="memberinfo" style={{ color: "#f50057" }}>Member Info</Nav.Link>
+              </Link>
+              <Link to={{
+                pathname: "/referralcode",
+                state: data
+              }}>
+                <Nav.Link href="referralcode" style={{ color: "#f50057" }}>Referral Codes</Nav.Link>
+              </Link>
+              <Link to={{
+                pathname: "/createcycle",
+                state: data
+              }}>
+                <Nav.Link href="createcycle" style={{ color: "#f50057" }}>Create Cycle</Nav.Link>
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <h1 style={{ color: "white", fontStyle: "italic" }}>Instructions:</h1>
+        <h4 style={{ color: "white", fontStyle: "italic" }}>Select "Choose File" and add the csv file you exported from bold extension.</h4>
+        <CSVReader onFileLoaded={(data) => {
+          this.setAllData(data);
+        }
+        } />
+        {/* <MemInfoPage sendData={this.state.allMemberData}></MemInfoPage> */}
+      </div>
     );
   }
 }

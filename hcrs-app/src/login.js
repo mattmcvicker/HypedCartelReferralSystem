@@ -2,18 +2,15 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import { firebase } from "./firebase/config";
 import Box from '@material-ui/core/Box';
 import { AuthContext } from "./context"
-
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Redirect } from 'react-router-dom';
+import './styles/mainstyles.css';
 
 function Copyright() {
   return (
@@ -37,14 +34,16 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "rgba(38, 39, 44, 0.959)",
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    color: "#ffffff",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: "#ffffff",
   },
 }));
 
@@ -76,58 +75,62 @@ export default function SignIn() {
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
-  
+
   if (Auth.isLoggedIn) {
-    return <Redirect to={{pathname: "/home", state: {loggedIn: true}}}/>
+    return <Redirect to={{ pathname: "/home", state: { loggedIn: true } }} />
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Sign in
+    <div className="mainContainer" width="100%" height="100%">
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Typography style={{color: "#ffffff"}} component="h1" variant="h5">
+            Sign in
         </Typography>
-        <form onSubmit={handleSignIn} className={classes.form}>
-          <TextField
-            onChange={handleEmail}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            onChange={handlePassword}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
+          <form onSubmit={handleSignIn} className={classes.form}>
+            <TextField
+              onChange={handleEmail}
+              variant="outlined"
+              margin="normal"
+              color="secondary"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              onChange={handlePassword}
+              variant="outlined"
+              margin="normal"
+              color="secondary"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
             <Button
               type="submit"
+              color="secondary"
               fullWidth
               variant="contained"
-              color="primary"
               className={classes.submit}
               onSubmit={handleSignIn}
             >
               Sign In
           </Button>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
+    </div>
   );
 }

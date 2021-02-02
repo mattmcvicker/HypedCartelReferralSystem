@@ -22,9 +22,9 @@ class CreateCycle extends React.Component {
             loadTable: false
         }
     }
-    
+
     // static contextType = AuthContext
-    
+
     componentDidMount() {
         var test = this.props.location.state;
         if (test !== undefined && test.allData !== undefined) {
@@ -99,7 +99,7 @@ class CreateCycle extends React.Component {
     handleClose = () => {
         this.setState({ open: false })
     }
-    
+
     render() {
         const data = {
             allData: this.state.allMemberData,
@@ -113,8 +113,8 @@ class CreateCycle extends React.Component {
         if (this.state.allActiveMembers.length === 0) {
             return (
                 <div>
-                    <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="/home">Hyped Cartel Usage Tracker</Navbar.Brand>
+                    <Navbar bg="dark" expand="lg">
+                        <Navbar.Brand style={{ color: "#f50057" }}>Hyped Cartel Usage Tracker</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
@@ -122,25 +122,25 @@ class CreateCycle extends React.Component {
                                     pathname: "/home",
                                     state: data
                                 }}>
-                                    <Nav.Link href="/home">Home</Nav.Link>
+                                    <Nav.Link href="/home" style={{ color: "#f50057" }}>Home</Nav.Link>
                                 </Link>
                                 <Link to={{
                                     pathname: "/memberinfo",
                                     state: data
                                 }}>
-                                    <Nav.Link href="memberinfo">Member Info</Nav.Link>
+                                    <Nav.Link href="memberinfo" style={{ color: "#f50057" }}>Member Info</Nav.Link>
                                 </Link>
                                 <Link to={{
                                     pathname: "/referralcode",
                                     state: data
                                 }}>
-                                    <Nav.Link href="referralcode">Referral Codes</Nav.Link>
+                                    <Nav.Link href="referralcode" style={{ color: "#f50057" }}>Referral Codes</Nav.Link>
                                 </Link>
                                 <Link to={{
                                     pathname: "/createcycle",
                                     state: data
                                 }}>
-                                    <Nav.Link href="createcycle">Create Cycle</Nav.Link>
+                                    <Nav.Link href="createcycle" style={{ color: "#f50057" }}>Create Cycle</Nav.Link>
                                 </Link>
                             </Nav>
                         </Navbar.Collapse>
@@ -152,42 +152,49 @@ class CreateCycle extends React.Component {
 
         return (
             <div>
-                <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="/">Hyped Cartel Usage Tracker</Navbar.Brand>
+                <Navbar bg="dark" expand="lg">
+                    <Navbar.Brand style={{ color: "#f50057" }}>Hyped Cartel Usage Tracker</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/">Home</Nav.Link>
+                            <Link to={{
+                                pathname: "/home",
+                                state: data
+                            }}>
+                                <Nav.Link href="/home" style={{ color: "#f50057" }}>Home</Nav.Link>
+                            </Link>
                             <Link to={{
                                 pathname: "/memberinfo",
                                 state: data
                             }}>
-                                <Nav.Link href="memberinfo">Member Info</Nav.Link>
+                                <Nav.Link href="memberinfo" style={{ color: "#f50057" }}>Member Info</Nav.Link>
                             </Link>
                             <Link to={{
                                 pathname: "/referralcode",
                                 state: data
                             }}>
-                                <Nav.Link href="referralcode">Referral Codes</Nav.Link>
+                                <Nav.Link href="referralcode" style={{ color: "#f50057" }}>Referral Codes</Nav.Link>
                             </Link>
                             <Link to={{
                                 pathname: "/createcycle",
                                 state: data
                             }}>
-                                <Nav.Link href="createcycle">Create Cycle</Nav.Link>
+                                <Nav.Link href="createcycle" style={{ color: "#f50057" }}>Create Cycle</Nav.Link>
                             </Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <h4>Instructions: Input Usernames and corresponding referral codes, then click start cycle. Note: Only do this once per cycle!</h4>
+                <h4 style={{color: "white", fontStyle: "italic"}}>Instructions: Input Usernames and corresponding referral codes, then click start cycle. Note: Only do this once per cycle!</h4>
                 <div>
-                    <h1>Input User/ReferralCode:</h1>
-                    <p>Example (space after comma): Instagram, UserName </p>
-                    <p><input type='text' placeholder='Submit referral code' name='referralValue' onChange={this.handleReferralInputChange}></input></p>
-                    <p><Button variant="contained" color="secondary" onClick={this.handleReferralSubmit}>Submit user and code</Button></p>
+                    <h1 style={{color: "white", fontStyle: "italic"}}>Input User/ReferralCode:</h1>
+                    <p  style={{color: "white", fontStyle: "italic"}}>Example (space after comma): Instagram, UserName </p>
+                    <div style={{display: "flex", paddingTop: "20px"}}>
+                        <p style={{paddingTop: "5px"}}><input type='text' placeholder='Submit referral code' name='referralValue' onChange={this.handleReferralInputChange}></input></p>
+                        <p style={{paddingLeft: "10px"}}><Button variant="contained" color="secondary" onClick={this.handleReferralSubmit}>Submit user and code</Button></p>
+                    </div>
                     <p><Button variant="contained" color="secondary" onClick={this.handleStartCycle}>Start Cycle</Button></p>
                 </div>
-                <h1>OR</h1>
+                <h1 style={{color:"white"}}>OR</h1>
                 <RandomMemberModal randomMembers={this.state.randomMembers}></RandomMemberModal>
             </div>
         )

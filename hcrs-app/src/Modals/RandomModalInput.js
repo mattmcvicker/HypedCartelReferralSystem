@@ -90,26 +90,26 @@ export default function RandomModalInput(props) {
     }
 
     return (
-        <div>
+        <div style={{display: 'flex', flexDirection: "column"}}>
             <form className={classes.root} noValidate autoComplete="off">
                 <FormControl>
-                    <InputLabel htmlFor="component-simple">Referral Code</InputLabel>
+                    <InputLabel htmlFor="component-simple">Referral Code 1</InputLabel>
                     <Input id="component-simple" value={one} onChange={handleOne} />
                 </FormControl>
                 <FormControl>
-                    <InputLabel htmlFor="component-simple">Referral Code</InputLabel>
+                    <InputLabel htmlFor="component-simple">Referral Code 2</InputLabel>
                     <Input id="component-simple" value={two} onChange={handleTwo} />
                 </FormControl>
                 <FormControl>
-                    <InputLabel htmlFor="component-simple">Referral Code</InputLabel>
+                    <InputLabel htmlFor="component-simple">Referral Code 3</InputLabel>
                     <Input id="component-simple" value={three} onChange={handleThree} />
                 </FormControl>
                 <FormControl>
-                    <InputLabel htmlFor="component-simple">Referral Code</InputLabel>
+                    <InputLabel htmlFor="component-simple">Referral Code 4</InputLabel>
                     <Input id="component-simple" value={four} onChange={handleFour} />
                 </FormControl>
                 <FormControl>
-                    <InputLabel htmlFor="component-simple">Referral Code</InputLabel>
+                    <InputLabel htmlFor="component-simple">Referral Code 5</InputLabel>
                     <Input id="component-simple" value={five} onChange={handleFive} />
                 </FormControl>
             </form>

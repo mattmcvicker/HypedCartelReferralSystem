@@ -55,7 +55,7 @@ class ReferralCode extends React.Component {
             return (
                 <div>
                     <Navbar bg="light" expand="lg">
-                        <Navbar.Brand href="/home">Hyped Cartel Usage Tracker</Navbar.Brand>
+                        <Navbar.Brand style={{ color: "#f50057" }}>Hyped Cartel Usage Tracker</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
@@ -63,25 +63,25 @@ class ReferralCode extends React.Component {
                                     pathname: "/home",
                                     state: data
                                 }}>
-                                    <Nav.Link href="/home">Home</Nav.Link>
+                                    <Nav.Link href="/home" style={{ color: "#f50057" }}>Home</Nav.Link>
                                 </Link>
                                 <Link to={{
                                     pathname: "/memberinfo",
                                     state: data
                                 }}>
-                                    <Nav.Link href="memberinfo">Member Info</Nav.Link>
+                                    <Nav.Link href="memberinfo" style={{ color: "#f50057" }}>Member Info</Nav.Link>
                                 </Link>
                                 <Link to={{
                                     pathname: "/referralcode",
                                     state: data
                                 }}>
-                                    <Nav.Link href="referralcode">Referral Codes</Nav.Link>
+                                    <Nav.Link href="referralcode" style={{ color: "#f50057" }}>Referral Codes</Nav.Link>
                                 </Link>
                                 <Link to={{
                                     pathname: "/createcycle",
                                     state: data
                                 }}>
-                                    <Nav.Link href="createcycle">Create Cycle</Nav.Link>
+                                    <Nav.Link href="createcycle" style={{ color: "#f50057" }}>Create Cycle</Nav.Link>
                                 </Link>
                             </Nav>
                         </Navbar.Collapse>
@@ -93,44 +93,41 @@ class ReferralCode extends React.Component {
 
         return (
             <div>
-                <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="/">Hyped Cartel Usage Tracker</Navbar.Brand>
+                <Navbar bg="dark" expand="lg">
+                    <Navbar.Brand style={{ color: "#f50057" }}>Hyped Cartel Usage Tracker</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Link to={{
-                                pathname: "/",
+                                pathname: "/home",
                                 state: data
                             }}>
-                                <Nav.Link href="/">Home</Nav.Link>
+                                <Nav.Link href="/home" style={{ color: "#f50057" }}>Home</Nav.Link>
                             </Link>
                             <Link to={{
                                 pathname: "/memberinfo",
                                 state: data
                             }}>
-                                <Nav.Link href="memberinfo">Member Info</Nav.Link>
+                                <Nav.Link href="memberinfo" style={{ color: "#f50057" }}>Member Info</Nav.Link>
                             </Link>
                             <Link to={{
                                 pathname: "/referralcode",
                                 state: data
                             }}>
-                                <Nav.Link href="referralcode">Referral Codes</Nav.Link>
+                                <Nav.Link href="referralcode" style={{ color: "#f50057" }}>Referral Codes</Nav.Link>
                             </Link>
                             <Link to={{
                                 pathname: "/createcycle",
                                 state: data
                             }}>
-                                <Nav.Link href="createcycle">Create Cycle</Nav.Link>
+                                <Nav.Link href="createcycle" style={{ color: "#f50057" }}>Create Cycle</Nav.Link>
                             </Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <div>
-                    <h2>Current Refferal Cycle: </h2>
+                <div style={{paddingTop: "20px", paddingBottom: "20px"}}>
                     <CurrentCycleTable allMemberData={this.state.allMemberData}></CurrentCycleTable>
                 </div>
-                <div><h3>Total Count: {this.state.currentSelectedCount}</h3></div>
-                <div>{currentSelectedCode}</div>
             </div>
         )
     }
