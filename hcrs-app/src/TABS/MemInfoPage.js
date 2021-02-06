@@ -24,7 +24,7 @@ class MemInfoPage extends React.Component {
         if (test !== undefined && test.allData !== undefined) {
             const { allData, activeData } = this.props.location.state
             console.log("MemInfOPage")
-            console.log(activeData)
+            console.log(allData)
             console.log("MemInfOPage")
             this.setState({ allActiveMembers: activeData });
             this.setState({ allMemberData: allData });
@@ -115,7 +115,7 @@ class MemInfoPage extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <AllMemberTable data={this.state.allActiveMembers}></AllMemberTable>
+                <AllMemberTable data={this.state.allMemberData}></AllMemberTable>
             </div>
         )
     }

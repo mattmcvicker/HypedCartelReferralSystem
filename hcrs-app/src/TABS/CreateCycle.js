@@ -19,7 +19,8 @@ class CreateCycle extends React.Component {
             allMemberData: [],
             allActiveMembers: [],
             randomMembers: [],
-            loadTable: false
+            loadTable: false,
+            count: 0
         }
     }
 
@@ -29,9 +30,6 @@ class CreateCycle extends React.Component {
         var test = this.props.location.state;
         if (test !== undefined && test.allData !== undefined) {
             const { allData, activeData } = this.props.location.state
-            console.log("MemInfOPage")
-            console.log(activeData)
-            console.log("MemInfOPage")
             this.setState({ allActiveMembers: activeData });
             this.setState({ allMemberData: allData });
             var randomFive = [];
@@ -45,20 +43,23 @@ class CreateCycle extends React.Component {
 
     handleReferralSubmit = (event) => {
         event.preventDefault()
+        if (this.state.referralValue == null) {
+            return;
+        }
         if (this.state.usersReferrals.length < 5) {
             if (this.state.referralValue.includes(", ")) {
                 var w = this.state.referralValue.replace(/\s+/g, '');
                 var arr = w.split(',');
-                var user = arr[1];
+                var email = arr[1];
                 var code = arr[0];
                 var data = this.state.usersReferrals;
-                data.push({ user: user, code: code })
+                data.push({ email: email, code: code })
                 this.setState({ usersReferrals: data })
             } else {
                 alert("Please input the username followed by a comma and space! Ex: Username, Code")
             }
         } else {
-            alert("You have already submitted five users, please click reset cycle to reset.")
+            alert("You have already submitted five users, please start a new cycle to reset.")
         }
     }
 
@@ -69,10 +70,8 @@ class CreateCycle extends React.Component {
         })
     }
 
-
     handleStartCycle = () => {
-        if (this.state.usersReferrals.length === 5) {
-            console.log("working")
+        if (this.state.usersReferrals.length <= 5 && this.state.usersReferrals.length > 0) {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -89,15 +88,35 @@ class CreateCycle extends React.Component {
         }
     }
 
+    chooseRandomUser = () => {
+        var rand = this.state.allMemberData;
+        var randomMember = rand[Math.floor(Math.random() * rand.length)];
+        document.getElementById("submitUser").value = randomMember.email;
+    }
+
     modalStyle = {
         top: `${50}%`,
         left: `${50}%`,
         transform: `translate(-${50}%, -${50}%)`,
     };
 
-
     handleClose = () => {
         this.setState({ open: false })
+    }
+
+    handleRemoveUser = (event) => {
+        var value = event.target.parentElement.parentElement.childNodes[0].innerHTML;
+        var email;
+        if (value.includes(",")) {
+            email = value.split(", ")[1];
+        } else {
+            email = event.target.parentElement.childNodes[0].innerHTML.split(", ")[1];
+        }
+        var test = this.state.usersReferrals;
+        test = test.filter(function (item) {
+            return item.email !== email
+        })
+        this.setState({usersReferrals: test})
     }
 
     render() {
@@ -184,18 +203,28 @@ class CreateCycle extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <h4 style={{color: "white", fontStyle: "italic"}}>Instructions: Input Usernames and corresponding referral codes, then click start cycle. Note: Only do this once per cycle!</h4>
+                <h4 style={{ color: "white", fontStyle: "italic" }}>Instructions: Input Code and corresponding email for 1-5 codes, then click start cycle.</h4>
                 <div>
-                    <h1 style={{color: "white", fontStyle: "italic"}}>Input User/ReferralCode:</h1>
-                    <p  style={{color: "white", fontStyle: "italic"}}>Example (space after comma): Instagram, UserName </p>
-                    <div style={{display: "flex", paddingTop: "20px"}}>
-                        <p style={{paddingTop: "5px"}}><input type='text' placeholder='Submit referral code' name='referralValue' onChange={this.handleReferralInputChange}></input></p>
-                        <p style={{paddingLeft: "10px"}}><Button variant="contained" color="secondary" onClick={this.handleReferralSubmit}>Submit user and code</Button></p>
+                    <h1 style={{ color: "white", fontStyle: "italic" }}>Input Code/Email:</h1>
+                    <p style={{ color: "white", fontStyle: "italic" }}>Example (space after comma): Code, Email </p>
+                    <p style={{ color: "white", fontStyle: "italic" }}>Example2 (space after comma): Instagram, test@test.com </p>
+                    <div style={{ display: "flex", paddingTop: "20px" }}>
+                        <p style={{ paddingTop: "5px" }}><input style={{ width: "500px" }} id="submitUser" type='text' placeholder='Code, Email' name='referralValue' onChange={this.handleReferralInputChange}></input></p>
+                        <p style={{ paddingLeft: "10px" }}><Button variant="contained" color="secondary" onClick={this.handleReferralSubmit}>Submit Code and Email</Button></p>
+                        <p style={{ paddingLeft: "10px" }}><Button variant="contained" color="secondary" onClick={this.chooseRandomUser}>Select Random Email</Button></p>
                     </div>
+                    {this.state.usersReferrals.map((value, index) => {
+                        return (
+                            <div style={{ display: "flex", padding: "10px" }}>
+                                <h4 style={{ color: "white", fontStyle: "italic" }} key={value.email}>{index + 1}. {value.code}, {value.email}</h4>
+                                <Button style={{ marginLeft: "20px" }} variant="contained" color="secondary" onClick={this.handleRemoveUser}>Remove</Button>
+                            </div>
+                        )
+                    })}
                     <p><Button variant="contained" color="secondary" onClick={this.handleStartCycle}>Start Cycle</Button></p>
                 </div>
-                <h1 style={{color:"white"}}>OR</h1>
-                <RandomMemberModal randomMembers={this.state.randomMembers}></RandomMemberModal>
+                {/* <h1 style={{color:"white"}}>OR</h1>
+                <RandomMemberModal randomMembers={this.state.randomMembers}></RandomMemberModal> */}
             </div>
         )
     }

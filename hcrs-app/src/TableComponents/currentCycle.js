@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import "../styles/mainstyles.css"
 
 const newcolumns = [
-  { field: 'user', headerName: 'User', width: 130 },
+  // { field: 'user', headerName: 'User', width: 130 },
   { field: 'email', headerName: 'Email', width: 275 },
   { field: 'code', headerName: 'Referral Code', width: 160 },
   { field: 'count', headerName: 'Count', width: 130 }
@@ -28,7 +28,7 @@ export default function CurrentCycleTable(props) {
       data_ = snapshot.val()[keyValues[keyValues.length - 1]]
       data_.dataSubmitted.forEach((value) => {
         temp.push({
-          id: count, user: value.user, email: value.email, code: value.code
+          id: count, email: value.email, code: value.code
         })
         count++;
       })
@@ -45,10 +45,13 @@ export default function CurrentCycleTable(props) {
           console.log("Winner")
           counter++;
         }
+        if (props.allMemberData[j].status !== "Active") {
+          console.log(props.allMemberData[j].status)
+        }
       }
       final.push({
         id: i + 1,
-        user: tempRows[i].user,
+        // user: tempRows[i].user,
         email: tempRows[i].email,
         code: tempRows[i].code,
         count: counter
